@@ -18,17 +18,17 @@ jobs:
         uses: actions/checkout@v3
 
       # Task for 'cat' operation
-      - name: Operation: Cat
+      - name: "Operation: Cat"
         if: ${{ github.event.inputs.operation == 'cat' }}
         run: echo "Running tasks for 'cat' operation"
 
       # Task for 'dog' operation
-      - name: Operation: Dog
+      - name: "Operation: Dog"
         if: ${{ github.event.inputs.operation == 'dog' }}
         run: echo "Running tasks for 'dog' operation"
 
       # Task for 'bird' operation
-      - name: Operation: Bird
+      - name: "Operation: Bird"
         if: ${{ github.event.inputs.operation == 'bird' }}
         run: echo "Running tasks for 'bird' operation"
 
