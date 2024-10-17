@@ -5,6 +5,7 @@ on:
       operation:
         description: 'Choose the operation to perform'
         required: true
+        default: false
         type: boolean
         options:
           - cat
