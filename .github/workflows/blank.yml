@@ -5,8 +5,7 @@ on:
       operation:
         description: 'Choose the operation to perform'
         required: true
-        default: 'cat'
-        type: choice
+        type: boolean
         options:
           - cat
           - dog
