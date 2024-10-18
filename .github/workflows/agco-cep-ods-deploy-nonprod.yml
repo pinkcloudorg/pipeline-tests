@@ -1,4 +1,4 @@
-name: Manual Pipeline with Environment Selection
+name: agco-cep-ods-deploy-nonprod
 
 on:
   workflow_dispatch:
