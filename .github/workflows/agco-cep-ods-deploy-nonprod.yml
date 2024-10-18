@@ -39,6 +39,10 @@ jobs:
 
       - name: "Set environment variable"
         run: echo "ENVIRONMENT=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+      
+      - name: "Log Environment Information"
+        run: |
+          echo "::notice::Environment: ${{ github.event.inputs.environment }}"
 
       - name: "Deploy COMMON LAMBDA"
         if: ${{ github.event.inputs.deploy_common_lambda == 'true' }}
