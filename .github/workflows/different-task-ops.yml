@@ -1,4 +1,4 @@
-name: agco-cep-ods-deploy-nonprod
+name: diff-tasks-with-checkbox
 
 on:
   workflow_dispatch:
