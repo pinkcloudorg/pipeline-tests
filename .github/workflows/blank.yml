@@ -1,0 +1,69 @@
+name: deploy-nonprod 
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Choose the environment (dev, test, stage)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - test
+          - stage
+      branch_name:
+        description: 'Specify the branch name'
+        required: true
+        default: 'main'
+        type: string
+      deploy_common_lambda:
+        description: 'Deploy COMMON LAMBDA?'
+        required: true
+        default: false
+        type: boolean
+      deploy_stack_di:
+        description: 'Deploy STACK DI?'
+        required: true
+        default: false
+        type: boolean
+      deploy_stack_importimplement:
+        description: 'Deploy STACK IMPORTIMPLEMENT?'
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  conditional_job:
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Set environment and branch variables"
+        run: |
+          echo "JOB_ENV_NAME=${{ github.event.inputs.environment }}" >> $GITHUB_ENV
+          echo "JOB_BRANCH_NAME=${{ github.event.inputs.branch_name }}" >> $GITHUB_ENV
+
+      - name: "Log Environment and Branch Information"
+        run: |
+          echo "::notice::Environment: ${{ env.JOB_ENV_NAME }}"
+          echo "::notice::Branch: ${{ env.JOB_BRANCH_NAME }}"
+
+      - name: "Deploy COMMON LAMBDA"
+        if: ${{ github.event.inputs.deploy_common_lambda == 'true' }}
+        run: |
+          echo "S3 bucket created by the name: datalake-s3-${{ env.JOB_ENV_NAME }}"
+
+      - name: "Deploy STACK DI"
+        if: ${{ github.event.inputs.deploy_stack_di == 'true' }}
+        run: |
+          echo "S3 bucket created by the name: stack-di-s3-${{ env.JOB_ENV_NAME }}"
+
+      - name: "Deploy STACK IMPORTIMPLEMENT"
+        if: ${{ github.event.inputs.deploy_stack_importimplement == 'true' }}
+        run: |
+          echo "S3 bucket created by the name: stack-importimplement-s3-${{ env.JOB_ENV_NAME }}"
+
