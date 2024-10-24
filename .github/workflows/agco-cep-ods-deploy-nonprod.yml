@@ -29,8 +29,8 @@ on:
         type: boolean
 
 env:
-  JOB_BRANCH_NAME = "${{ github.ref_name }}"
-  JOB_ENV_NAME = "${{ github.event.inputs.environment }}"
+  JOB_BRANCH_NAME: "${{ github.ref_name }}"
+  JOB_ENV_NAME: "${{ github.event.inputs.environment }}"
   
 jobs:
   conditional_job:
