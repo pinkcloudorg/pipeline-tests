@@ -28,6 +28,10 @@ on:
         default: false
         type: boolean
 
+env:
+  JOB_BRANCH_NAME = "${{ github.ref_name }}"
+  JOB_ENV_NAME = "${{ github.event.inputs.environment }}"
+  
 jobs:
   conditional_job:
     runs-on: ubuntu-latest
@@ -42,6 +46,8 @@ jobs:
       
       - name: "Log Environment Information"
         run: |
+          echo $JOB_BRANCH_NAME
+          echo $JOB_ENV_NAME
           echo "::notice::Environment: ${{ github.event.inputs.environment }}"
 
       - name: "Deploy COMMON LAMBDA"
