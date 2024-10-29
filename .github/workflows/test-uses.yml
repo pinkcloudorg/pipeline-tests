@@ -1,4 +1,4 @@
-name: deploy-nonprod
+name: test-uses
 
 on:
   workflow_dispatch:
@@ -29,6 +29,11 @@ on:
         type: boolean
 
 jobs:
+  checkout:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
   deploy:
     runs-on: ubuntu-latest
     steps:
