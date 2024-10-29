@@ -36,7 +36,7 @@ jobs:
         uses: actions/checkout@v4
   
       - name: Deploy stuff
-        uses: ./actions-yaml/cep-ods.yaml
+        uses: ./.github/actions/action.yaml
         with:
           environment: ${{ github.event.inputs.environment }}
           DEPLOY_COMMON_LAMBDA: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA }}
