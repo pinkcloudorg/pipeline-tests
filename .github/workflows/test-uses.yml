@@ -32,6 +32,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
       - name: Use Custom Action for Deployment
         uses: ./.github/actions  # Points to the folder containing action.yaml
         with:
