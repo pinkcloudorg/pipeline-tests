@@ -1,0 +1,43 @@
+name: Deploy Non-Production
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      DEPLOY_COMMON_LAMBDA:
+        required: true
+        type: boolean
+      DEPLOY_STACK_DI:
+        required: true
+        type: boolean
+      DEPLOY_STACK_IMPORTIMPLEMENT:
+        required: true
+        type: boolean
+    secrets:
+      VSTS_CREDENTIALS_ID: # Secret value for Azure credentials or other purposes
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Deploy based on environment
+        env:
+          JOB_ENV_NAME: ${{ inputs.environment }}
+          DEPLOY_COMMON_LAMBDA: ${{ inputs.DEPLOY_COMMON_LAMBDA }}
+          DEPLOY_STACK_DI: ${{ inputs.DEPLOY_STACK_DI }}
+          DEPLOY_STACK_IMPORTIMPLEMENT: ${{ inputs.DEPLOY_STACK_IMPORTIMPLEMENT }}
+          VSTS_CREDENTIALS_ID: ${{ secrets.VSTS_CREDENTIALS_ID }}
+        run: |
+          echo "Environment: ${{ env.JOB_ENV_NAME }}"
+          echo "Deploying COMMON LAMBDA: ${{ env.DEPLOY_COMMON_LAMBDA }}"
+          echo "Deploying STACK DI: ${{ env.DEPLOY_STACK_DI }}"
+          echo "Deploying STACK IMPORTIMPLEMENT: ${{ env.DEPLOY_STACK_IMPORTIMPLEMENT }}"
+          # Add deployment commands here based on the environment and flags
