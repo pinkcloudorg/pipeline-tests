@@ -32,8 +32,6 @@ env:
   JOB_BRANCH_NAME: "${{ github.ref_name }}"
   JOB_ENV_NAME: "${{ github.event.inputs.environment }}"
   VSTS_CREDENTIALS_ID: "d2f973d4-0910-481a-91ac-432a0bcd5db0"
-  # GIT_URL_JOB: "https://agco-dcx.visualstudio.com/DCX/_git/cep-fieldmanagement"
-  # GIT_URL_TEMPLATES: "https://agco-dcx.visualstudio.com/DCX/_git/dcx-devops"
   CF_SUBNETS_STAGE: "subnet-67f6f111,subnet-764e4e12"
   CF_VPC_STAGE: "vpc-8a1e23ee"
   CF_SUBNETS_HOTFIX: "subnet-67f6f111,subnet-764e4e12"
@@ -42,8 +40,6 @@ env:
   CF_VPC_TEST: "vpc-8a1e23ee"
   CF_SUBNETS_DEV: "subnet-2075c444,subnet-514ce927"
   CF_VPC_DEV: "vpc-e676be82"
-  # CF_SUBNETS_DEPLOY: ""
-  # CF_VPC_DEPLOY: ""
 
 jobs:
   checkout:
