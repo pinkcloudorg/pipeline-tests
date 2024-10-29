@@ -1,4 +1,4 @@
-name: test uses
+name: test-uses
 
 on:
   workflow_dispatch:
@@ -42,5 +42,4 @@ jobs:
           DEPLOY_STACK_DI: ${{ github.event.inputs.DEPLOY_STACK_DI }}
           DEPLOY_STACK_IMPORTIMPLEMENT: ${{ github.event.inputs.DEPLOY_STACK_IMPORTIMPLEMENT }}
         env:
-          VSTS_CREDENTIALS_ID: ${{ secrets.VSTS_CREDENTIALS_ID }}
           JOB_BRANCH_NAME: ${{ github.ref_name }}
