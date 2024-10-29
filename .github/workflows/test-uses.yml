@@ -29,14 +29,12 @@ on:
         type: boolean
 
 jobs:
-  checkout:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
+  
       - name: Deploy stuff
         uses: ./actions-yaml/cep-ods.yaml
         with:
