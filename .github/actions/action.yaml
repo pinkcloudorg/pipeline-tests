@@ -17,21 +17,22 @@ inputs:
     required: true
     default: false
 
-runs:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-    - name: Deploy based on environment
-      env:
-        JOB_ENV_NAME: ${{ inputs.environment }}
-        DEPLOY_COMMON_LAMBDA: ${{ inputs.DEPLOY_COMMON_LAMBDA }}
-        DEPLOY_STACK_DI: ${{ inputs.DEPLOY_STACK_DI }}
-        DEPLOY_STACK_IMPORTIMPLEMENT: ${{ inputs.DEPLOY_STACK_IMPORTIMPLEMENT }}
-      run: |
-        echo "Environment: ${{ env.JOB_ENV_NAME }}"
-        echo "Deploy COMMON LAMBDA: ${{ env.DEPLOY_COMMON_LAMBDA }}"
-        echo "Deploy STACK DI: ${{ env.DEPLOY_STACK_DI }}"
-        echo "Deploy STACK IMPORTIMPLEMENT: ${{ env.DEPLOY_STACK_IMPORTIMPLEMENT }}"
+      - name: Deploy based on environment
+        env:
+          JOB_ENV_NAME: ${{ inputs.environment }}
+          DEPLOY_COMMON_LAMBDA: ${{ inputs.DEPLOY_COMMON_LAMBDA }}
+          DEPLOY_STACK_DI: ${{ inputs.DEPLOY_STACK_DI }}
+          DEPLOY_STACK_IMPORTIMPLEMENT: ${{ inputs.DEPLOY_STACK_IMPORTIMPLEMENT }}
+        run: |
+          echo "Environment: ${{ env.JOB_ENV_NAME }}"
+          echo "Deploy COMMON LAMBDA: ${{ env.DEPLOY_COMMON_LAMBDA }}"
+          echo "Deploy STACK DI: ${{ env.DEPLOY_STACK_DI }}"
+          echo "Deploy STACK IMPORTIMPLEMENT: ${{ env.DEPLOY_STACK_IMPORTIMPLEMENT }}"
         # Add your deployment commands here
