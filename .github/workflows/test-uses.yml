@@ -30,7 +30,7 @@ on:
 
 jobs:
   deploy:
-    uses: ./actions-yaml/cep-ods.yaml
+    uses: ./actions-yaml/cep-ods.yaml@main
     with:
       environment: ${{ github.event.inputs.environment }}
       DEPLOY_COMMON_LAMBDA: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA }}
