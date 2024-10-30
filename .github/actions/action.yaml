@@ -1,58 +1,71 @@
-name: agco-cep-ods-deploy-nonprod
-
-on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Choose the environment (dev, test, stage)'
-        required: true
-        default: 'dev'
-        type: choice
-        options:
-          - dev
-          - test
-          - stage
-      DEPLOY_COMMON_LAMBDA:
-        description: 'Deploy COMMON LAMBDA?'
-        required: true
-        default: false
-        type: boolean
-      DEPLOY_STACK_DI:
-        description: 'Deploy STACK DI?'
-        required: true
-        default: false
-        type: boolean
-      DEPLOY_STACK_IMPORTIMPLEMENT:
-        description: 'Deploy STACK IMPORTIMPLEMENT?'
-        required: true
-        default: false
-        type: boolean
-
-env:
-  JOB_BRANCH_NAME: "${{ github.ref_name }}"
-  JOB_ENV_NAME: "${{ github.event.inputs.environment }}"
-  VSTS_CREDENTIALS_ID: "d2f973d4-0910-481a-91ac-432a0bcd5db0"
-  CF_SUBNETS_STAGE: "subnet-67f6f111,subnet-764e4e12"
-  CF_VPC_STAGE: "vpc-8a1e23ee"
-  CF_SUBNETS_HOTFIX: "subnet-67f6f111,subnet-764e4e12"
-  CF_VPC_HOTFIX: "vpc-8a1e23ee"
-  CF_SUBNETS_TEST: "subnet-67f6f111,subnet-764e4e12"
-  CF_VPC_TEST: "vpc-8a1e23ee"
-  CF_SUBNETS_DEV: "subnet-2075c444,subnet-514ce927"
-  CF_VPC_DEV: "vpc-e676be82"
-
 jobs:
   checkout:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ env.JOB_BRANCH_NAME }}
 
       - name: List files for debug
         run: |
           echo "DEBUG:"
           ls -la ./
-          echo ${{ env.JOB_ENV_NAME }}
-          echo ${{ env.CF_VPC_HOTFIX }}
+          echo $JOB_BRANCH_NAME
+          echo $JOB_ENV_NAME
+          echo ${{ vars.VPC_DEV }}
+          echo ${{ vars.VPC_TEST }}
+          echo ${{ vars.VPC_STAGE }}
+          echo $CF_VPC_DEV
+          echo "VPC NOW: $CF_VPC_DEPLOY"
+          echo "VPC NOW: ${CF_VPC_DEPLOY@U}"
+  
+  deploy_python_code_cepfm:
+    if: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Python code - cepfm
+        run: |
+          pwd
+          echo $JOB_BRANCH_NAME
+          echo $JOB_ENV_NAME
+          echo $CF_VPC_DEV
+          echo "DEPLOY_COMMON_LAMBDA"
+  
+  deploy_python_code_fielddatamgmt:
+    if: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Python code - fielddatamgmt
+        run: |
+          pwd
+          echo "DEPLOY_COMMON_LAMBDA"
+
+  docker_preparation_di:
+    if: ${{ github.event.inputs.DEPLOY_STACK_DI == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker preparation - DI
+        run: |
+          pwd
+          echo "DEPLOY_STACK_DI"
+
+  docker_preparation_importimplement:
+    if: ${{ github.event.inputs.DEPLOY_STACK_IMPORTIMPLEMENT == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker preparation - ImportImplement
+        run: |
+          pwd
+          echo "DEBUG: Original Dockerfile"
+          echo "DEPLOY_STACK_IMPORTIMPLEMENT"
