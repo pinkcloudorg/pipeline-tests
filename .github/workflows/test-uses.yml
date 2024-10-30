@@ -54,7 +54,9 @@ jobs:
           ls -la ./
           echo $JOB_BRANCH_NAME
           echo $JOB_ENV_NAME
-          echo $DEPLOY_COMMON_LAMBDA
+          echo $VPC_DEV
+          echo $VPC_TEST
+          echo $VPC_STAGE
           echo $CF_VPC_DEV
   
   deploy_python_code_cepfm:
