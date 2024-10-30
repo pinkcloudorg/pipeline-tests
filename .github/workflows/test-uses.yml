@@ -41,7 +41,7 @@ env:
   CF_SUBNETS_DEV: "test8"
   CF_VPC_DEV: "test9"
   CF_VPC_DEPLOY: "VPC_${{ github.event.inputs.environment }}"
-  CF_VPC_DEPLOY_UPPER: ${{ format('VPC_{0}', github.event.inputs.environment) | upper }}
+  CF_VPC_DEPLOY_UPPER: "VPC_${{ github.event.inputs.environment@U }}"
 
 jobs:
   checkout:
