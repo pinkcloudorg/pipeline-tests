@@ -69,6 +69,44 @@ jobs:
           pwd
           echo $JOB_BRANCH_NAME
           echo $JOB_ENV_NAME
-          echo $DEPLOY_COMMON_LAMBDA
           echo $CF_VPC_DEV
+          echo "DEPLOY_COMMON_LAMBDA"
+  
+  deploy_python_code_fielddatamgmt:
+    if: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Python code - fielddatamgmt
+        run: |
+          pwd
+          echo "DEPLOY_COMMON_LAMBDA"
+
+  docker_preparation_di:
+    if: ${{ github.event.inputs.DEPLOY_STACK_DI == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker preparation - DI
+        run: |
+          pwd
+          echo "DEPLOY_STACK_DI"
+
+  docker_preparation_importimplement:
+    if: ${{ github.event.inputs.DEPLOY_STACK_IMPORTIMPLEMENT == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Docker preparation - ImportImplement
+        run: |
+          pwd
+          echo "DEBUG: Original Dockerfile"
+          echo "DEPLOY_STACK_IMPORTIMPLEMENT"
+
     
