@@ -41,6 +41,7 @@ env:
   CF_SUBNETS_DEV: "test8"
   CF_VPC_DEV: "test9"
   CF_VPC_DEPLOY: "VPC_${{ github.event.inputs.environment }}"
+  CF_VPC_DEPLOY_UPPER: ${{ format('VPC_{0}', github.event.inputs.environment) | upper }}
 
 jobs:
   checkout:
@@ -60,6 +61,7 @@ jobs:
           echo ${{ vars.VPC_STAGE }}
           echo $CF_VPC_DEV
           echo "VPC NOW: $CF_VPC_DEPLOY"
+          echo "VPC NOW: $CF_VPC_DEPLOY_UPPER"
   
   deploy_python_code_cepfm:
     if: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA == 'true' }}
