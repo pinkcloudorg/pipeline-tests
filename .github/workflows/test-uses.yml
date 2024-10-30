@@ -59,6 +59,7 @@ jobs:
           echo ${{ vars.VPC_TEST }}
           echo ${{ vars.VPC_STAGE }}
           echo $CF_VPC_DEV
+          echo "VPC NOW: $CF_VPC_DEPLOY"
           echo "VPC NOW: ${CF_VPC_DEPLOY@U}"
   
   deploy_python_code_cepfm:
