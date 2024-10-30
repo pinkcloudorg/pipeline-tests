@@ -47,31 +47,28 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ env.JOB_BRANCH_NAME }}
 
       - name: List files for debug
         run: |
           echo "DEBUG:"
           ls -la ./
-          echo ${{ env.JOB_BRANCH_NAME }}
-          echo ${{ JOB_ENV_NAME }}
-          echo ${{ DEPLOY_COMMON_LAMBDA }}
-          echo ${{ CF_VPC_DEV }}
+          echo $JOB_BRANCH_NAME
+          echo $JOB_ENV_NAME
+          echo $DEPLOY_COMMON_LAMBDA
+          echo $CF_VPC_DEV
+  
   deploy_python_code_cepfm:
     if: ${{ github.event.inputs.DEPLOY_COMMON_LAMBDA == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: ${{ env.JOB_BRANCH_NAME }}
 
       - name: Deploy Python code - cepfm
         run: |
           pwd
-          echo ${{ env.JOB_BRANCH_NAME }}
-          echo ${{ JOB_ENV_NAME }}
-          echo ${{ DEPLOY_COMMON_LAMBDA }}
-          echo ${{ CF_VPC_DEV }}
+          echo $JOB_BRANCH_NAME
+          echo $JOB_ENV_NAME
+          echo $DEPLOY_COMMON_LAMBDA
+          echo $CF_VPC_DEV
     
