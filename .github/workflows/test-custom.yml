@@ -1,4 +1,4 @@
-name: test-workflow
+name: test-custom
 
 on:
   workflow_dispatch:
