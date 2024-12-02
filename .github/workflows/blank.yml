@@ -4,34 +4,51 @@ on:
   workflow_dispatch:
     inputs:
       documentroots:
-        description: "Comma-separated list of DOCUMENTROOT values (e.g., 'root1,root2'). Use 'all' to select all."
+        description: "Select DOCUMENTROOT(s) from the predefined list (comma-separated if multiple)"
         required: true
         default: "all"
+        options: # Predefined list of valid DOCUMENTROOT values
+          - all
+          - root1
+          - root2
+          - root3
+          - root4
+          # Add more values as needed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Define DOCUMENTROOT values
-        id: define-values
+      - name: Process Selected DOCUMENTROOT Values
+        id: process-roots
         run: |
           # List of all possible DOCUMENTROOT values
-          ALL_DOCUMENTROOTS=("root1" "root2" "root3" "root4") # Add all 70 values here
+          ALL_DOCUMENTROOTS=("root1" "root2" "root3" "root4") # Add the full list
 
-          # Read input
+          # Input from the workflow_dispatch
           INPUT="${{ github.event.inputs.documentroots }}"
 
-          # Process input
           if [[ "$INPUT" == "all" ]]; then
             SELECTED_DOCUMENTROOTS=("${ALL_DOCUMENTROOTS[@]}")
           else
-            IFS=',' read -ra SELECTED_DOCUMENTROOTS <<< "$INPUT"
+            IFS=',' read -ra INPUT_ARRAY <<< "$INPUT"
+            SELECTED_DOCUMENTROOTS=()
+            for item in "${INPUT_ARRAY[@]}"; do
+              # Validate the input against the predefined list
+              if [[ " ${ALL_DOCUMENTROOTS[*]} " =~ " $item " ]]; then
+                SELECTED_DOCUMENTROOTS+=("$item")
+              else
+                echo "Invalid DOCUMENTROOT: $item"
+                exit 1
+              fi
+            done
           fi
 
-          # Export the list as a single string for use in other steps
+          # Export the selected DOCUMENTROOTS as a comma-separated string
           echo "SELECTED=$(IFS=,; echo "${SELECTED_DOCUMENTROOTS[*]}")"
           echo "SELECTED_DOCUMENTROOTS=$SELECTED" >> $GITHUB_ENV
 
@@ -42,4 +59,5 @@ jobs:
           echo "Selected DOCUMENTROOTS: $DOCUMENTROOTS"
 
           # Construct and execute your SSH command
-          #ssh user@host "some-command --documentroots \"$DOCUMENTROOTS\""
+          echo \"$DOCUMENTROOTS\""
+
