@@ -1,36 +1,427 @@
-# This is a basic workflow to help you get started with Actions
+name: Clear Cache
 
-name: CI
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      job_name:
+        description: "Specify the JOB_NAME equivalent"
+        required: true
+        default: "deploy-test"
+      000_agcocorp:
+        description: "Use 000-agcocorp"
+        required: false
+        default: false
+        type: boolean
+      aem_author:
+        description: "Use aem-author"
+        required: false
+        default: false
+        type: boolean
+      agco_cpp_events:
+        description: "Use agco-cpp-events"
+        required: false
+        default: false
+        type: boolean
+      agcocorp:
+        description: "Use agcocorp"
+        required: false
+        default: false
+        type: boolean
+      agcocorp_es_AR:
+        description: "Use agcocorp_es_AR"
+        required: false
+        default: false
+        type: boolean
+      agcocorp_es_MX:
+        description: "Use agcocorp_es_MX"
+        required: false
+        default: false
+        type: boolean
+      agcocorp_fr_FR:
+        description: "Use agcocorp_fr_FR"
+        required: false
+        default: false
+        type: boolean
+      agcocorp_pl_PL:
+        description: "Use agcocorp_pl_PL"
+        required: false
+        default: false
+        type: boolean
+      agcocorp_pt_BR:
+        description: "Use agcocorp_pt_BR"
+        required: false
+        default: false
+        type: boolean
+      agcocorp_zh_CN:
+        description: "Use agcocorp_zh_CN"
+        required: false
+        default: false
+        type: boolean
+      agcofoundation:
+        description: "Use agcofoundation"
+        required: false
+        default: false
+        type: boolean
+      agcopartsandservice:
+        description: "Use agcopartsandservice"
+        required: false
+        default: false
+        type: boolean
+      agrev:
+        description: "Use agrev"
+        required: false
+        default: false
+        type: boolean
+      agrev_ccd:
+        description: "Use agrev-ccd"
+        required: false
+        default: false
+        type: boolean
+      applylikeapro:
+        description: "Use applylikeapro"
+        required: false
+        default: false
+        type: boolean
+      assethub:
+        description: "Use assethub"
+        required: false
+        default: false
+        type: boolean
+      automatedproduction:
+        description: "Use automatedproduction"
+        required: false
+        default: false
+        type: boolean
+      brandhub:
+        description: "Use brandhub"
+        required: false
+        default: false
+        type: boolean
+      challenger_ag_au:
+        description: "Use challenger-ag-au"
+        required: false
+        default: false
+        type: boolean
+      cimbria:
+        description: "Use cimbria"
+        required: false
+        default: false
+        type: boolean
+      consent:
+        description: "Use consent"
+        required: false
+        default: false
+        type: boolean
+      cumberlandpoultry:
+        description: "Use cumberlandpoultry"
+        required: false
+        default: false
+        type: boolean
+      dam_agcocorp:
+        description: "Use dam-agcocorp"
+        required: false
+        default: false
+        type: boolean
+      employeeonboarding:
+        description: "Use employeeonboarding"
+        required: false
+        default: false
+        type: boolean
+      fendt_apps:
+        description: "Use fendt-apps"
+        required: false
+        default: false
+        type: boolean
+      fendt_cep:
+        description: "Use fendt-cep"
+        required: false
+        default: false
+        type: boolean
+      fendt_one:
+        description: "Use fendt-one"
+        required: false
+        default: false
+        type: boolean
+      fusesmartfarming:
+        description: "Use fusesmartfarming"
+        required: false
+        default: false
+        type: boolean
+      gleanercombines:
+        description: "Use gleanercombines"
+        required: false
+        default: false
+        type: boolean
+      grainsystems:
+        description: "Use grainsystems"
+        required: false
+        default: false
+        type: boolean
+      grainandprotein:
+        description: "Use grainandprotein"
+        required: false
+        default: false
+        type: boolean
+      hesston:
+        description: "Use hesston"
+        required: false
+        default: false
+        type: boolean
+      iam_agcocorp:
+        description: "Use iam-agcocorp"
+        required: false
+        default: false
+        type: boolean
+      locator_agcocorp:
+        description: "Use locator-agcocorp"
+        required: false
+        default: false
+        type: boolean
+      masseyferguson_pt_br:
+        description: "Use masseyferguson_pt_br"
+        required: false
+        default: false
+        type: boolean
+      masseyfergusonglobal:
+        description: "Use masseyfergusonglobal"
+        required: false
+        default: false
+        type: boolean
+      media_center_agcocorp:
+        description: "Use media-center-agcocorp"
+        required: false
+        default: false
+        type: boolean
+      mediaplace_agcocorp:
+        description: "Use mediaplace-agcocorp"
+        required: false
+        default: false
+        type: boolean
+      mymf_masseyferguson_co_uk:
+        description: "Use mymf-masseyferguson-co-uk"
+        required: false
+        default: false
+        type: boolean
+      mymf_masseyferguson_com:
+        description: "Use mymf-masseyferguson-com"
+        required: false
+        default: false
+        type: boolean
+      mymf_masseyferguson_de:
+        description: "Use mymf-masseyferguson-de"
+        required: false
+        default: false
+        type: boolean
+      mymf_masseyferguson_fr:
+        description: "Use mymf-masseyferguson-fr"
+        required: false
+        default: false
+        type: boolean
+      poultryequipment:
+        description: "Use poultryequipment"
+        required: false
+        default: false
+        type: boolean
+      smartag:
+        description: "Use smartag"
+        required: false
+        default: false
+        type: boolean
+      sunflower:
+        description: "Use sunflower"
+        required: false
+        default: false
+        type: boolean
+      valtra:
+        description: "Use valtra"
+        required: false
+        default: false
+        type: boolean
+      valtra_africa:
+        description: "Use valtra-africa"
+        required: false
+        default: false
+        type: boolean
+      valtra_all:
+        description: "Use valtra-all"
+        required: false
+        default: false
+        type: boolean
+      valtra_ar:
+        description: "Use valtra-ar"
+        required: false
+        default: false
+        type: boolean
+      valtra_at:
+        description: "Use valtra-at"
+        required: false
+        default: false
+        type: boolean
+      valtra_au:
+        description: "Use valtra-au"
+        required: false
+        default: false
+        type: boolean
+      valtra_be:
+        description: "Use valtra-be"
+        required: false
+        default: false
+        type: boolean
+      valtra_cz:
+        description: "Use valtra-cz"
+        required: false
+        default: false
+        type: boolean
+      valtra_de:
+        description: "Use valtra-de"
+        required: false
+        default: false
+        type: boolean
+      valtra_dk:
+        description: "Use valtra-dk"
+        required: false
+        default: false
+        type: boolean
+      valtra_ee:
+        description: "Use valtra-ee"
+        required: false
+        default: false
+        type: boolean
+      valtra_es:
+        description: "Use valtra-es"
+        required: false
+        default: false
+        type: boolean
+      valtra_fi:
+        description: "Use valtra-fi"
+        required: false
+        default: false
+        type: boolean
+      valtra_fr:
+        description: "Use valtra-fr"
+        required: false
+        default: false
+        type: boolean
+      valtra_hu:
+        description: "Use valtra-hu"
+        required: false
+        default: false
+        type: boolean
+      valtra_it:
+        description: "Use valtra-it"
+        required: false
+        default: false
+        type: boolean
+      valtra_lt:
+        description: "Use valtra-lt"
+        required: false
+        default: false
+        type: boolean
+      valtra_lv:
+        description: "Use valtra-lv"
+        required: false
+        default: false
+        type: boolean
+      valtra_nl:
+        description: "Use valtra-nl"
+        required: false
+        default: false
+        type: boolean
+      valtra_no:
+        description: "Use valtra-no"
+        required: false
+        default: false
+        type: boolean
+      valtra_pl:
+        description: "Use valtra-pl"
+        required: false
+        default: false
+        type: boolean
+      valtra_pt:
+        description: "Use valtra-pt"
+        required: false
+        default: false
+        type: boolean
+      valtra_pt_br:
+        description: "Use valtra-pt_br"
+        required: false
+        default: false
+        type: boolean
+      valtra_ru:
+        description: "Use valtra-ru"
+        required: false
+        default: false
+        type: boolean
+      valtra_se:
+        description: "Use valtra-se"
+        required: false
+        default: false
+        type: boolean
+      valtra_sk:
+        description: "Use valtra-sk"
+        required: false
+        default: false
+        type: boolean
+      valtra_uk:
+        description: "Use valtra-uk"
+        required: false
+        default: false
+        type: boolean
+      whiteplanter:
+        description: "Use whiteplanter"
+        required: false
+        default: false
+        type: boolean
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Setup Environment Variables
+        id: setup_env
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          # Extract the environment from JOB_NAME
+          ENVIRONMENT="${{ github.event.inputs.job_name }}"
+          ENVIRONMENT="${ENVIRONMENT##*-}"
+          echo "ENVIRONMENT=${ENVIRONMENT}" >> $GITHUB_ENV
+
+          # Create an empty array for selected DOCUMENTROOT values
+          echo "SELECTED_DOCUMENTROOTS=()" >> $GITHUB_ENV
+
+          # Dynamically check each input and add it to DOCUMENTROOTS if selected
+          for input in 000_agcocorp aem_author agco_cpp_events agcocorp agcocorp_es_AR agcocorp_es_MX agcocorp_fr_FR \
+            agcocorp_pl_PL agcocorp_pt_BR agcocorp_zh_CN agcofoundation agcopartsandservice agrev agrev_ccd \
+            applylikeapro assethub automatedproduction brandhub challenger_ag_au cimbria consent \
+            cumberlandpoultry dam_agcocorp employeeonboarding fendt_apps fendt_cep fendt_one fusesmartfarming \
+            gleanercombines grainsystems grainandprotein hesston iam_agcocorp locator_agcocorp \
+            masseyferguson_pt_br masseyfergusonglobal media_center_agcocorp mediaplace_agcocorp \
+            mymf_masseyferguson_co_uk mymf_masseyferguson_com mymf_masseyferguson_de mymf_masseyferguson_fr \
+            poultryequipment smartag sunflower valtra valtra_africa valtra_all valtra_ar valtra_at valtra_au \
+            valtra_be valtra_cz valtra_de valtra_dk valtra_ee valtra_es valtra_fi valtra_fr valtra_hu valtra_it \
+            valtra_lt valtra_lv valtra_nl valtra_no valtra_pl valtra_pt valtra_pt_br valtra_ru valtra_se \
+            valtra_sk valtra_uk whiteplanter; do
+              if [[ "${{ github.event.inputs[$input] }}" == "true" ]]; then
+                echo "Adding DOCUMENTROOT: $input"
+                echo "SELECTED_DOCUMENTROOTS+=('/var/www/$input')" >> $GITHUB_ENV
+              fi
+          done
+
+      - name: Debug Selected Inputs
+        run: |
+          echo "Environment: $ENVIRONMENT"
+          echo "Selected DOCUMENTROOTS: ${SELECTED_DOCUMENTROOTS[@]}"
+
+      - name: Clear Cache on Servers
+        env:
+          ENVIRONMENT: ${{ env.ENVIRONMENT }}
+          SSH_OPTS: "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          SELECTED_DOCUMENTROOTS: ${{ env.SELECTED_DOCUMENTROOTS }}
+        run: |
+          for server in dispatch1 dispatch2; do
+            TARGET="jenkins@${server}-${ENVIRONMENT}-corp.com"
+            for DOCUMENTROOT in ${SELECTED_DOCUMENTROOTS[@]}; do
+              echo "Clearing cache for $DOCUMENTROOT on $TARGET"
+              #ssh $SSH_OPTS $TARGET "sudo -u apache /etc/httpd/clearcache $DOCUMENTROOT"
+              echo $DOCUMENTROOT
+            done
+          done
